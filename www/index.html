@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <title>Richard Merchandise Hub</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page">
+        <div class="header-with-logo">
+            <span class="header-emoji">🔧</span>
+            <h1 class="header-title">Richard Merchandise Hub</h1>
+        </div>
+        <div class="container">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="loginPassword" placeholder="Enter password" required>
+                        <span class="eye-icon" onclick="togglePassword('loginPassword')">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <p class="text-center">
+                Don't have an account? <a href="#" onclick="showPage('registerPage'); return false;">Register here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Registration Page -->
+    <div id="registerPage" class="page">
+        <div class="header-with-logo">
+            <span class="header-emoji">🔧</span>
+            <h1 class="header-title">Richard Merchandise Hub</h1>
+        </div>
+        <div class="container">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regFullName">Full Name</label>
+                    <input type="text" id="regFullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="regPassword" placeholder="Enter password" required>
+                        <span class="eye-icon" onclick="togglePassword('regPassword')">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <div class="password-container">
+                        <input type="password" id="regConfirmPassword" placeholder="Confirm password" required>
+                        <span class="eye-icon" onclick="togglePassword('regConfirmPassword')">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Register</button>
+            </form>
+            <p class="text-center">
+                Already have an account? <a href="#" onclick="showPage('loginPage'); return false;">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboardPage" class="page">
+        <div class="header-with-logo">
+            <span class="header-emoji">🔧</span>
+            <h1 class="header-title">Richard Merchandise Hub</h1>
+        </div>
+        <div class="container">
+            <h2>Dashboard</h2>
+            <div class="dashboard-menu">
+                <button class="menu-btn" onclick="showPage('inventoryPage')">
+                    <i class="fas fa-boxes"></i> Product Inventory
+                </button>
+                <button class="menu-btn" onclick="showPage('profilePage')">
+                    <i class="fas fa-user"></i> My Profile
+                </button>
+                <button class="menu-btn" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profilePage" class="page">
+        <div class="header-with-logo">
+            <span class="header-emoji">🔧</span>
+            <h1 class="header-title">Richard Merchandise Hub</h1>
+        </div>
+        <div class="container">
+            <h2>My Profile</h2>
+            <div class="profile-section">
+                <div class="profile-pic-container">
+                    <img id="profilePic" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Profile Picture">
+                    <button class="btn-small" onclick="changeProfilePic()">Change Photo</button>
+                </div>
+            </div>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="profileFullName">Full Name</label>
+                    <input type="text" id="profileFullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="profileUsername">Username</label>
+                    <input type="text" id="profileUsername" disabled>
+                </div>
+                <button type="submit" class="btn-primary">Update Profile</button>
+            </form>
+            <button class="btn-secondary" onclick="showPage('dashboardPage')">Back to Dashboard</button>
+        </div>
+    </div>
+
+    <!-- Product Inventory Page -->
+    <div id="inventoryPage" class="page">
+        <div class="header-with-logo">
+            <span class="header-emoji">🔧</span>
+            <h1 class="header-title">Richard Merchandise Hub</h1>
+        </div>
+        <div class="container">
+            <h2>Product Inventory</h2>
+            
+            <div class="search-section">
+                <input type="text" id="searchInput" placeholder="Search by name, category, or price..." class="search-bar">
+            </div>
+
+            <button class="btn-primary" onclick="showPage('addProductPage')">+ Add New Product</button>
+
+            <div class="product-stats">
+                <p>Total Available Products: <strong id="totalProducts">0</strong></p>
+            </div>
+
+            <div id="productList" class="products-grid">
+                <!-- Products will be loaded here -->
+            </div>
+
+            <button class="btn-secondary" onclick="showPage('dashboardPage')">Back to Dashboard</button>
+        </div>
+    </div>
+
+    <!-- Add Product Page -->
+    <div id="addProductPage" class="page">
+        <div class="header-with-logo">
+            <span class="header-emoji">🔧</span>
+            <h1 class="header-title">Richard Merchandise Hub</h1>
+        </div>
+        <div class="container">
+            <h2>Add Product</h2>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" id="productName" placeholder="Enter product name" required>
+                </div>
+                <div class="form-group">
+                    <label for="productCategory">Category</label>
+                    <select id="productCategory" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="Plasticware">Plasticware</option>
+                        <option value="Kitchenware">Kitchenware</option>
+                        <option value="Beauty Products">Beauty Products</option>
+                        <option value="Mobile Phone Accessories">Mobile Phone Accessories</option>
+                        <option value="Foam">Foam</option>
+                        <option value="Tools">Tools</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Price (₱)</label>
+                    <input type="number" id="productPrice" placeholder="Enter price" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="productQuantity">Quantity</label>
+                    <input type="number" id="productQuantity" placeholder="Enter quantity" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <textarea id="productDescription" placeholder="Enter product description" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Product Image</label>
+                    <input type="file" id="productImage" accept="image/*">
+                    <img id="productImagePreview" style="max-width: 200px; margin-top: 10px; display: none;">
+                </div>
+                <button type="submit" class="btn-primary">Add Product</button>
+            </form>
+            <button class="btn-secondary" onclick="showPage('inventoryPage')">Back to Inventory</button>
+        </div>
+    </div>
+
+    <!-- Edit Product Page -->
+    <div id="editProductPage" class="page">
+        <div class="header-with-logo">
+            <span class="header-emoji">🔧</span>
+            <h1 class="header-title">Richard Merchandise Hub</h1>
+        </div>
+        <div class="container">
+            <h2>Edit Product</h2>
+            <form id="editProductForm">
+                <div class="form-group">
+                    <label for="editProductName">Product Name</label>
+                    <input type="text" id="editProductName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editProductCategory">Category</label>
+                    <select id="editProductCategory" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="Plasticware">Plasticware</option>
+                        <option value="Kitchenware">Kitchenware</option>
+                        <option value="Beauty Products">Beauty Products</option>
+                        <option value="Mobile Phone Accessories">Mobile Phone Accessories</option>
+                        <option value="Foam">Foam</option>
+                        <option value="Tools">Tools</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editProductPrice">Price (₱)</label>
+                    <input type="number" id="editProductPrice" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="editProductQuantity">Quantity</label>
+                    <input type="number" id="editProductQuantity" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="editProductDescription">Description</label>
+                    <textarea id="editProductDescription" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Product Image</label>
+                    <input type="file" id="editProductImage" accept="image/*">
+                    <img id="editProductImagePreview" style="max-width: 200px; margin-top: 10px; display: none;">
+                </div>
+                <button type="submit" class="btn-primary">Update Product</button>
+            </form>
+            <button class="btn-secondary" onclick="showPage('inventoryPage')">Back to Inventory</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="cordova.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

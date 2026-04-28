@@ -1,0 +1,35 @@
+{
+  "name": "Richard Merchandise Hub",
+  "version": "1.0.0",
+  "description": "A merchandise inventory management mobile application",
+  "main": "index.js",
+  "scripts": {
+    "build": "cordova build android --release",
+    "run": "cordova run android",
+    "prepare": "cordova prepare",
+    "plugin-add": "cordova plugin add cordova-plugin-camera cordova-plugin-file cordova-plugin-splashscreen"
+  },
+  "keywords": [
+    "cordova",
+    "inventory",
+    "tools"
+  ],
+  "author": "",
+  "license": "ISC",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-camera": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-dialogs": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  },
+  "devDependencies": {
+    "cordova-android": "^15.0.0"
+  }
+}
